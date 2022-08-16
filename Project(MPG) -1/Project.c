@@ -30,10 +30,10 @@ int main()
         printf("                    MATRIX PUZZLE\n");
         printf("                    RULES OF THIS GAME\n");
         printf("      1.You can move only one step by arrow key\n");
-        printf("             Move Up : by Press key w or W \n");
-        printf("             Move Down : by press key s or S \n");
-        printf("             Move Left : by Left press key l or L \n");
-        printf("             Move Right : by Right press key d or D \n\n");
+        printf("             Move Up : by Up arrow key \n");
+        printf("             Move Down : by down arrow key \n");
+        printf("             Move Left : by Left arrow key \n");
+        printf("             Move Right : by Right arrow key \n\n");
         printf("      2.You can move number at empty position only\n");
         printf("  3.for each valid move : your total number of move will decreased by 1\n");
         printf("4.Wining situation : Number in a 4*4 matrix should be in order from 1 to 15\n");

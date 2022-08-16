@@ -1,4 +1,4 @@
-/*                       Math puzzle project-        */
+/*                       Matrix puzzle game project-        */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

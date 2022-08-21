@@ -1,4 +1,4 @@
-/*                       Matrix puzzle game project-        */
+/*                       Number shifting game project-        */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -7,10 +7,10 @@ void srand(unsigned int seed);
 void random_arr(int[][4]);
 void fillMatrice(int[][4], int[]);
 int compare(int[][4], int[][4]);
-void moveup(int[][4]);
-void movedown(int[][4]);
-void moveleft(int[][4]);
-void moveright(int[][4]);
+int moveup(int[][4]);
+int movedown(int[][4]);
+int moveleft(int[][4]);
+int moveright(int[][4]);
 
 int main()
 {
@@ -19,7 +19,6 @@ int main()
     {
         int i, j, move = 10, chances = 1, winner;
         char c;
-
         char name[50];
         int arr[4][4];
         int marr[4][4] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 32};
@@ -30,8 +29,8 @@ int main()
         printf("                    MATRIX PUZZLE\n");
         printf("                    RULES OF THIS GAME\n");
         printf("      1.You can move only one step by arrow key\n");
-        printf("             Move Up : by Up arrow key \n");
-        printf("             Move Down : by down arrow key \n");
+        printf("             Move Up : by up arrow key \n");
+        printf("             Move Down : by down key  \n");
         printf("             Move Left : by Left arrow key \n");
         printf("             Move Right : by Right arrow key \n\n");
         printf("      2.You can move number at empty position only\n");
@@ -68,23 +67,47 @@ int main()
             //    move up key
             if (c == 72)
             {
-                moveup(arr);
+                int x;
+                x = moveup(arr);
+                if (x == 1)
+                {
+                    move--;
+                    chances++;
+                }
             }
             // move down key
             else if (c == 80)
             {
-                movedown(arr);
+                int x;
+                x = movedown(arr);
+                if (x == 1)
+                {
+                    move--;
+                    chances++;
+                }
             }
 
             // move right key
             else if (c == 77)
             {
-                moveright(arr);
+                int x;
+                x = moveright(arr);
+                if (x == 1)
+                {
+                    move--;
+                    chances++;
+                }
             }
             //   move left key
             else if (c == 75)
             {
-                moveleft(arr);
+                int x;
+                x = moveleft(arr);
+                if (x == 1)
+                {
+                    move--;
+                    chances++;
+                }
             }
             // move e key
             else if (c == 'e' || c == 'E')
@@ -93,14 +116,9 @@ int main()
                 break;
             }
 
-            if (c == 72 || c == 75 || c == 77 || c == 80)
-            {
-                move--;
-                chances++;
-            }
             system("cls");
             printf("Player name : - %s\t\t\t\t\t  Move remaining : %d\n", name, move);
-        printf("\n---------------------------------\n");
+            printf("\n---------------------------------\n");
             for (i = 0; i < 4; i++)
             {
                 for (j = 0; j < 4; j++)
@@ -181,7 +199,7 @@ void fillMatrice(int game[][4], int a[])
         }
     }
     game[3][3] = 32;
-        printf("\n---------------------------------\n");
+    printf("\n---------------------------------\n");
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 4; j++)
@@ -218,7 +236,7 @@ int compare(int user[][4], int sort[][4])
     if (flag == 16)
         return 0;
 }
-void moveup(int arr[][4])
+int moveup(int arr[][4])
 {
     int i, j;
     for (i = 0; i < 4; i++)
@@ -232,11 +250,14 @@ void moveup(int arr[][4])
                 arr[i][j] = arr[i - 1][j] - arr[i][j];
                 arr[i - 1][j] = arr[i - 1][j] - arr[i][j];
             }
+            if (arr[i][j] == 32 && i < 1)
+                return 0;
         }
         printf("\n");
     }
+    return 1;
 }
-void movedown(int arr[][4])
+int movedown(int arr[][4])
 {
     int temp = 0;
     int r, c, i, j;
@@ -252,18 +273,22 @@ void movedown(int arr[][4])
                 c = j;
                 printf("%d", temp);
             }
+
             if (temp == 32 && i < 3)
             {
                 arr[r + 1][c] = temp;
                 break;
             }
+            if (arr[i][j] == 32 && i == 3)
+                return 0;
         }
         printf("\n");
         if (temp == 32)
             break;
     }
+    return 1;
 }
-void moveleft(int arr[][4])
+int moveleft(int arr[][4])
 {
     int temp, i, j;
     for (i = 0; i < 4; i++)
@@ -277,12 +302,16 @@ void moveleft(int arr[][4])
                 arr[i][j] = arr[i][j - 1];
                 arr[i][j - 1] = temp;
             }
+            if (arr[i][j] == 32 && j == 0)
+                return 0;
         }
+
         printf("\n");
     }
+    return 1;
 }
 
-void moveright(int arr[][4])
+int moveright(int arr[][4])
 {
 
     int r, c, i, j, temp = 0;
@@ -300,6 +329,8 @@ void moveright(int arr[][4])
                 c = j;
                 printf("%d", temp);
             }
+            if (arr[i][j] == 32 && j == 3)
+                return 0;
             if (temp == 32 && j < 3)
             {
                 arr[r][c + 1] = temp;
@@ -309,4 +340,5 @@ void moveright(int arr[][4])
 
         printf("\n");
     }
+    return 1;
 }
